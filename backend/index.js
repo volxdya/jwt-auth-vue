@@ -17,8 +17,16 @@ let mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/auth');
 
 const userSchema = mongoose.Schema({
-    login: String,
-    password: String,
+    login: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true,
+        unique: false
+    },
 });
 
 const User = mongoose.model('user', userSchema);
@@ -35,7 +43,8 @@ app.post(`/register`, async (req, res) => {
         await user.save();
         res.send(200);
     } catch (e) {
-        res.send(e);
+        console.log(e);
+        res.sendStatus(404);
     }
 });
 
@@ -49,11 +58,19 @@ app.post(`/login`, async (req, res) => {
     // IF (USER) => CREATE TOKEN AND SEND HIM
     try {
         const token = jwt.sign({
-            login: user.login
+            login: user.login,
+            id: user._id
         }, DEV_KEY);
 
         res.send({ token: token })
     } catch (e) {
-        res.sendStatus(400);
+        console.log(e);
+        res.sendStatus(404);
     }
 });
+
+app.get(`/get_user_data`, async (req, res) => {
+    const user = await User.findOne({_id: req.query.id});
+
+    res.send(user);
+})

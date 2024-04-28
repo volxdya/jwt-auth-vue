@@ -1,20 +1,5 @@
-<script>
-export default {
-  data() {
-  },
-  methods: {
-    goLogin() {
-      this.$router.push({
-        name: 'AuthPage',
-      })
-    },
-    goRegister() {
-      this.$router.push({
-        name: 'RegisterPage',
-      })
-    },
-  }
-};
+<script setup lang="ts">
+
 </script>
 
 <template>
@@ -22,8 +7,12 @@ export default {
     <div>
       <h2>Привет. Это простая авторизация на Vue3 + Express + MongoDB</h2>
       <div class="d-flex justify-content-center mt-2 gap-2 mt-4">
-        <button class="button" @click="goLogin">Войти</button>
-        <button class="button" @click="goRegister">Регистрация</button>
+        <RouterLink to="/login">
+          <button class="button">Войти</button>
+        </RouterLink>
+        <RouterLink to="/register">
+          <button class="button">Регистрация</button>
+        </RouterLink>
       </div>
     </div>
   </div>
