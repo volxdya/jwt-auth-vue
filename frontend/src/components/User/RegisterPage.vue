@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {type Ref, ref, watchEffect} from "vue";
+import { type Ref, ref, watchEffect } from "vue";
 import axios from "axios";
 import Alert from "@/components/ui/Alert.vue";
 
@@ -34,7 +34,7 @@ function success() {
 }
 
 
-async function register(event: FormDataEvent) {
+async function register(event: Event) {
   event.preventDefault();
 
   if (login.value == "" || password.value == "") {
@@ -65,17 +65,17 @@ async function register(event: FormDataEvent) {
             <div class="col-12">
               <label>
                 <p class="label">Логин <span class="title">*</span></p>
-                <input type="text" v-model="login">
+                <input type="text" placeholder="Введите логин" v-model="login">
               </label>
             </div>
-            <div class="col-12 mt-3">
+            <div class="col-12 mt-4">
               <label>
                 <p class="label">Пароль <span class="title">*</span></p>
-                <input type="text" v-model="password">
+                <input type="text" placeholder="Введите пароль" v-model="password">
               </label>
             </div>
             <RouterLink to="/login">
-              <p class="mt-3 go-login">
+              <p class="mt-5 go-login">
                 <span class="have-account">Есть аккаунт?</span>
                 <span class="mx-1 login">Войти</span>
               </p>
@@ -83,24 +83,18 @@ async function register(event: FormDataEvent) {
             <div class="col-12">
               <transition name="fade">
                 <div v-if="isSuccess">
-                  <Alert
-                      text="Успешная регистрация!"
-                      type="success"
-                  />
+                  <Alert text="Успешная регистрация!" type="success" />
                 </div>
               </transition>
               <transition name="fade">
                 <div v-if="isError">
-                  <Alert
-                      text="Неизвестная ошибка"
-                      type="danger"
-                  />
+                  <Alert text="Неизвестная ошибка" type="danger" />
                 </div>
               </transition>
             </div>
           </div>
           <div class="col-12">
-            <button class="mt-4 button">Регистрация</button>
+            <button class="mt-3 button">Регистрация</button>
           </div>
         </div>
       </form>
@@ -109,17 +103,21 @@ async function register(event: FormDataEvent) {
 </template>
 
 <style scoped>
-
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity .50s ease;
 }
 
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
+
 .main-title {
   font-size: 30px;
+  color: aliceblue;
 }
+
 a {
   text-decoration: none;
   color: black;
@@ -139,14 +137,15 @@ a {
 
 .button {
   border: none;
-  outline: 1px solid #e3e3e3;
+  outline: 1px solid #2b2b2b;
   height: 50px;
   width: 400px;
   border-radius: 10px;
-  background: linear-gradient(21deg, #f811ff, #11e1ec);
+  background: none;
   color: aliceblue;
   font-size: 19px;
 }
+
 
 .button:hover {
   transform: scale(1.05);
@@ -154,16 +153,18 @@ a {
 }
 
 .have-account {
-  color: #838383;
+  color: #e2e2e2;
   font-weight: 500;
+}
+.login {
+  color: rgb(160, 160, 160);
 }
 
 .container-form {
   height: 700px;
-  background: #ffffff;
+  background: rgba(34, 34, 34, 0.518);
   border-radius: 25px;
   width: 45%;
-  border: 1px solid #e3e3e3;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -178,19 +179,26 @@ input {
   background: none;
   padding-left: 15px;
   border: none;
-  outline: 1px solid #e3e3e3;
+  outline: 1px solid #2a2a2a;
+  color: rgb(254, 254, 254);
   height: 40px;
   border-radius: 10px;
+}
+
+input:focus {
+  transform: scale(1.03);
+  background: #3d3d3d;
+  transition: transform 0.4s ease-in-out, background 0.4s ease-in-out;
+}
+
+input::placeholder {
+  color: rgb(213, 213, 213)
 }
 
 .label {
   font-weight: 500;
   margin-bottom: 10px;
+  color: aliceblue;
 }
 
-input:focus {
-  transform: scale(1.03);
-  background: #f1f1f1;
-  transition: transform 0.4s ease-in-out, backround 0.4s ease-in-out;
-}
 </style>

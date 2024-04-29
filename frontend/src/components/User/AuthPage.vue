@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {type Ref, ref} from "vue";
+import { type Ref, ref } from "vue";
 import axios from "axios";
-import {setItem} from "@/utils/localStorage";
+import { setItem } from "@/utils/localStorage";
 import Alert from "@/components/ui/Alert.vue";
 
 const login: Ref<string> = ref("");
@@ -67,33 +67,27 @@ async function auth(event: Event) {
             <div class="col-12">
               <label>
                 <p class="label">Логин <span class="title">*</span></p>
-                <input type="text" v-model="login">
+                <input type="text" placeholder="Введите логин" v-model="login">
               </label>
             </div>
             <div class="col-12 mt-3">
               <label>
                 <p class="label">Пароль <span class="title">*</span></p>
-                <input type="text" v-model="password">
+                <input type="text" placeholder="Введите пароль" v-model="password">
               </label>
             </div>
             <RouterLink to="/profile">
               <p class="mt-3">
-                <span>Перейти к профилю</span>
+                <span class="go-profile">Перейти к профилю</span>
               </p>
             </RouterLink>
             <div class="col-12">
               <div class="row">
                 <div class="col-12 mt-3" v-if="isSuccess">
-                  <Alert
-                      type="success"
-                      text="Успешная авторизация"
-                  />
+                  <Alert type="success" text="Успешная авторизация" />
                 </div>
                 <div class="col-12 mt-3" v-if="isError">
-                  <Alert
-                      type="danger"
-                      text="Ошибка!"
-                  />
+                  <Alert type="danger" text="Ошибка!" />
                 </div>
                 <div class="col-6">
                   <button class="mt-4 button">Войти</button>
@@ -125,26 +119,23 @@ a {
   justify-content: center;
   align-items: center;
 }
+.go-profile {
+  color: rgb(163, 163, 163);
+}
 .main-title {
   font-size: 30px;
+  color: aliceblue;
 }
 
 .button {
   border: none;
-  outline: 1px solid #e3e3e3;
+  outline: 1px solid #2b2b2b;
   height: 50px;
   width: 200px;
   border-radius: 10px;
-  background: linear-gradient(21deg, #f811ff, #11e1ec);
+  background: none;
   color: aliceblue;
   font-size: 19px;
-}
-
-.button-register {
-  height: 50px;
-  border: none;
-  background: none;
-  width: 200px;
 }
 
 .button:hover {
@@ -152,16 +143,25 @@ a {
   transition: transform 0.5s;
 }
 
+.button-register {
+  height: 50px;
+  border: none;
+  background: none;
+  color: rgb(207, 207, 207);
+  width: 200px;
+}
+
+
 .container-form {
   height: 700px;
-  background: #ffffff;
+  background: rgba(34, 34, 34, 0.518);
   border-radius: 25px;
   width: 45%;
-  border: 1px solid #e3e3e3;
   display: flex;
   align-content: center;
   justify-content: center;
 }
+
 
 .title {
   color: red;
@@ -172,22 +172,26 @@ input {
   background: none;
   padding-left: 15px;
   border: none;
-  outline: 1px solid #e3e3e3;
+  outline: 1px solid #2a2a2a;
+  color: rgb(254, 254, 254);
   height: 40px;
   border-radius: 10px;
+}
+
+input:focus {
+  transform: scale(1.03);
+  background: #3d3d3d;
+  transition: transform 0.4s ease-in-out, background 0.4s ease-in-out;
+}
+
+input::placeholder {
+  color: rgb(213, 213, 213)
 }
 
 .label {
   font-weight: 500;
   margin-bottom: 10px;
+  color: aliceblue;
 }
 
-input:focus {
-  transform: scale(1.03);
-  background: #f1f1f1;
-  transition: transform 0.4s ease-in-out, backround 0.4s ease-in-out;
-}
-.alert {
-  width: 400px;
-}
 </style>

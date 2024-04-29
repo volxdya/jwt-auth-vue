@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {onMounted, type Ref, ref, watchEffect} from "vue";
+import { onMounted, type Ref, ref, watchEffect } from "vue";
 import axios from "axios";
-import {decode} from "jwt-js-decode";
+import { decode } from "jwt-js-decode";
 
 interface userData {
   _id?: string;
@@ -44,18 +44,11 @@ function logOut() {
   <div class="d-flex justify-content-center">
     <div class="col-9 test" v-if="token">
       <div class="banner">
-        <img
-            src="https://i.pinimg.com/564x/17/40/b0/1740b0c94e4457fde617fb133d622b35.jpg"
-            alt="banner"
-            class="banner"
-        >
+        <img src="https://i.pinimg.com/564x/17/40/b0/1740b0c94e4457fde617fb133d622b35.jpg" alt="banner" class="banner">
         <div class="row">
           <div class="col-3">
-            <img
-                src="https://i.pinimg.com/736x/17/fc/60/17fc600d9bfd9f4aff6bdd718e82df98.jpg"
-                alt="avatar"
-                class="avatar"
-            >
+            <img src="https://i.pinimg.com/736x/17/fc/60/17fc600d9bfd9f4aff6bdd718e82df98.jpg" alt="avatar"
+              class="avatar">
           </div>
           <div class="col-8 main-data">
             <p class="login">{{ userData.login }}</p>
@@ -66,7 +59,7 @@ function logOut() {
       </div>
     </div>
     <div v-else class="mt-3">
-      <h4>Вы не авторизованы,
+      <h4 class="go-login">Вы не авторизованы,
         <RouterLink to="/login">Войти</RouterLink>
       </h4>
     </div>
@@ -74,9 +67,12 @@ function logOut() {
 </template>
 
 <style scoped>
+.go-login {
+  color: aliceblue;
+}
 .banner {
   width: 100%;
-  outline: 3px solid #ababab;
+  outline: 3px solid #626262;
   object-fit: cover;
   height: 300px;
   border-radius: 25px;
@@ -84,11 +80,11 @@ function logOut() {
 
 .button {
   border: none;
-  outline: 1px solid #e3e3e3;
+  outline: 1px solid #2b2b2b;
   height: 50px;
   width: 200px;
   border-radius: 10px;
-  background: linear-gradient(21deg, #f811ff, #11e1ec);
+  background: none;
   color: aliceblue;
   font-size: 19px;
 }
@@ -116,5 +112,6 @@ function logOut() {
 .login {
   font-size: 30px;
   font-weight: 500;
+  color: aliceblue;
 }
 </style>
