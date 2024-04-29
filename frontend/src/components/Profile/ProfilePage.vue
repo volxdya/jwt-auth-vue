@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { onMounted, type Ref, ref, watchEffect } from "vue";
+import {onMounted, type Ref, ref, watchEffect} from "vue";
 import axios from "axios";
-import { decode } from "jwt-js-decode";
+import {decode} from "jwt-js-decode";
+import PostInput from "@/components/Profile/Post/Post.vue";
+import Post from "@/components/Profile/Post/Post.vue";
 
 interface userData {
   _id?: string;
@@ -48,14 +50,16 @@ function logOut() {
         <div class="row">
           <div class="col-3">
             <img src="https://i.pinimg.com/736x/17/fc/60/17fc600d9bfd9f4aff6bdd718e82df98.jpg" alt="avatar"
-              class="avatar">
+                 class="avatar">
           </div>
           <div class="col-8 main-data">
             <p class="login">{{ userData.login }}</p>
           </div>
         </div>
-
-        <button class="w-100 button" @click="logOut">Выйти</button>
+        <div class="post">
+          <Post :id="id" :login="userData.login"/>
+        </div>
+        <!--        <button class="w-100 button" @click="logOut">Выйти</button>-->
       </div>
     </div>
     <div v-else class="mt-3">
@@ -70,6 +74,7 @@ function logOut() {
 .go-login {
   color: aliceblue;
 }
+
 .banner {
   width: 100%;
   outline: 3px solid #626262;

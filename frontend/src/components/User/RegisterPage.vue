@@ -103,16 +103,6 @@ async function register(event: Event) {
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity .50s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
 .main-title {
   font-size: 30px;
   color: aliceblue;
@@ -187,7 +177,7 @@ input {
 
 input:focus {
   transform: scale(1.03);
-  background: #3d3d3d;
+  background: rgba(47, 47, 47, 0.46);
   transition: transform 0.4s ease-in-out, background 0.4s ease-in-out;
 }
 

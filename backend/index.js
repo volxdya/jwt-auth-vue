@@ -16,7 +16,7 @@ app.use(express.json());
 let mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/auth');
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     login: {
         type: String,
         required: true,
@@ -30,6 +30,21 @@ const userSchema = mongoose.Schema({
 });
 
 const User = mongoose.model('user', userSchema);
+
+const postSchema = new mongoose.Schema({
+    text: {
+        type: String,
+        required: true
+    },
+    author_id: {
+        type: mongoose.ObjectId,
+        ref: 'user'
+    }
+}, {
+    timestamps: true
+});
+
+const Post = mongoose.model('post', postSchema);
 
 const jwt = require('jsonwebtoken');
 const DEV_KEY = "DEV_KEY";
@@ -62,7 +77,7 @@ app.post(`/login`, async (req, res) => {
             id: user._id
         }, DEV_KEY);
 
-        res.send({ token: token })
+        res.send({token: token})
     } catch (e) {
         console.log(e);
         res.sendStatus(404);
@@ -72,5 +87,40 @@ app.post(`/login`, async (req, res) => {
 app.get(`/get_user_data`, async (req, res) => {
     const user = await User.findOne({_id: req.query.id});
 
-    res.send(user);
-})
+    try {
+        res.send(user);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(404);
+    }
+});
+
+app.post(`/create_post`, async (req, res) => {
+    const {author_id, text} = req.body;
+
+    try {
+        const post = new Post({
+            author_id: author_id,
+            text: text,
+        });
+
+        await post.save();
+
+        res.send(post);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(404);
+    }
+});
+
+app.get(`/get_posts_user`, async (req, res) => {
+    const {author_id} = req.query;
+    try {
+        const post = await Post.find({author_id: author_id});
+
+        res.send(post);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(404);
+    }
+});
