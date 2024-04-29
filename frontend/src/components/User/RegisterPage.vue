@@ -58,7 +58,10 @@ async function register(event: FormDataEvent) {
     <div class="container-form">
       <form class="form d-flex justify-content-center align-items-center" @submit="register">
         <div class="col-8">
-          <div class="row">
+          <div class="text-center">
+            <p class="main-title">Регистрация</p>
+          </div>
+          <div class="row mt-4">
             <div class="col-12">
               <label>
                 <p class="label">Логин <span class="title">*</span></p>
@@ -114,7 +117,9 @@ async function register(event: FormDataEvent) {
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
 }
-
+.main-title {
+  font-size: 30px;
+}
 a {
   text-decoration: none;
   color: black;

@@ -13,6 +13,9 @@
         <RouterLink to="/register">
           <button class="button">Регистрация</button>
         </RouterLink>
+        <RouterLink to="/profile">
+          <button class="button">Профиль</button>
+        </RouterLink>
       </div>
     </div>
   </div>

@@ -18,7 +18,7 @@ function error() {
 
   setInterval(() => {
     isError.value = false;
-  }, 5000);
+  }, 10000);
 }
 
 function success() {
@@ -31,11 +31,11 @@ function success() {
 
   setInterval(() => {
     isSuccess.value = false;
-  }, 5000);
+  }, 10000);
 }
 
 
-async function auth(event: FormDataEvent) {
+async function auth(event: Event) {
   event.preventDefault();
 
   if (login.value == "" || password.value == "") {
@@ -60,7 +60,10 @@ async function auth(event: FormDataEvent) {
     <div class="container-form">
       <form class="form d-flex justify-content-center align-items-center" @submit="auth">
         <div class="col-8">
-          <div class="row">
+          <div class="text-center">
+            <p class="main-title">Авторизация</p>
+          </div>
+          <div class="row mt-4">
             <div class="col-12">
               <label>
                 <p class="label">Логин <span class="title">*</span></p>
@@ -73,6 +76,11 @@ async function auth(event: FormDataEvent) {
                 <input type="text" v-model="password">
               </label>
             </div>
+            <RouterLink to="/profile">
+              <p class="mt-3">
+                <span>Перейти к профилю</span>
+              </p>
+            </RouterLink>
             <div class="col-12">
               <div class="row">
                 <div class="col-12 mt-3" v-if="isSuccess">
@@ -116,6 +124,9 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.main-title {
+  font-size: 30px;
 }
 
 .button {
