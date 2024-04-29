@@ -114,10 +114,6 @@ a {
   width: 45%;
 }
 
-.alert {
-  width: 400px;
-}
-
 .wrapper {
   height: 100vh;
   display: flex;

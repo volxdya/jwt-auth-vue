@@ -13,6 +13,10 @@ import {RouterLink, RouterView} from 'vue-router'
 </template>
 
 <style>
+.alert {
+  width: 400px;
+}
+
 body {
   background-color: #f9f9f9;
   overflow: hidden;

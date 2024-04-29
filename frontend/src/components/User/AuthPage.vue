@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { type Ref, ref } from "vue";
+import {type Ref, ref} from "vue";
 import axios from "axios";
-import { setItem } from "@/utils/localStorage";
+import {setItem} from "@/utils/localStorage";
 import Alert from "@/components/ui/Alert.vue";
 
 const login: Ref<string> = ref("");
@@ -83,11 +83,17 @@ async function auth(event: Event) {
             </RouterLink>
             <div class="col-12">
               <div class="row">
-                <div class="col-12 mt-3" v-if="isSuccess">
-                  <Alert type="success" text="Успешная авторизация" />
-                </div>
-                <div class="col-12 mt-3" v-if="isError">
-                  <Alert type="danger" text="Ошибка!" />
+                <div class="col-12">
+                  <transition name="fade">
+                    <div v-if="isSuccess">
+                      <Alert text="Успешная авторизация!" type="success"/>
+                    </div>
+                  </transition>
+                  <transition name="fade">
+                    <div v-if="isError">
+                      <Alert text="Неизвестная ошибка" type="danger"/>
+                    </div>
+                  </transition>
                 </div>
                 <div class="col-6">
                   <button class="mt-4 button">Войти</button>
@@ -119,9 +125,11 @@ a {
   justify-content: center;
   align-items: center;
 }
+
 .go-profile {
   color: rgb(163, 163, 163);
 }
+
 .main-title {
   font-size: 30px;
   color: aliceblue;

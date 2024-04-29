@@ -2,7 +2,6 @@
 import axios from "axios";
 import {onMounted, type Ref, ref} from "vue";
 import PostPage from "@/components/Profile/Post/PostPage/PostPage.vue";
-import Alert from "@/components/ui/Alert.vue";
 
 const text: Ref<string> = ref("");
 
