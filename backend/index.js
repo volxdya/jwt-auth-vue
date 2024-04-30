@@ -77,7 +77,7 @@ app.post(`/login`, async (req, res) => {
             id: user._id
         }, DEV_KEY);
 
-        res.send({token: token})
+        res.send({ token: token })
     } catch (e) {
         console.log(e);
         res.sendStatus(404);
@@ -85,7 +85,7 @@ app.post(`/login`, async (req, res) => {
 });
 
 app.get(`/get_user_data`, async (req, res) => {
-    const user = await User.findOne({_id: req.query.id});
+    const user = await User.findOne({ _id: req.query.id });
 
     try {
         res.send(user);
@@ -96,7 +96,7 @@ app.get(`/get_user_data`, async (req, res) => {
 });
 
 app.post(`/create_post`, async (req, res) => {
-    const {author_id, text} = req.body;
+    const { author_id, text } = req.body;
 
     try {
         const post = new Post({
@@ -114,9 +114,10 @@ app.post(`/create_post`, async (req, res) => {
 });
 
 app.get(`/get_posts_user`, async (req, res) => {
-    const {author_id} = req.query;
+    const { author_id } = req.query;
     try {
-        const post = await Post.find({author_id: author_id});
+        const post = await Post.find({ author_id: author_id }).sort({createdAt: -1});
+        
 
         res.send(post);
     } catch (e) {

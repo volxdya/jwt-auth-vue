@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {type Ref, ref} from "vue";
+import { type Ref, ref } from "vue";
 import axios from "axios";
-import {setItem} from "@/utils/localStorage";
+import { setItem } from "@/utils/localStorage";
 import Alert from "@/components/ui/Alert.vue";
 
 const login: Ref<string> = ref("");
@@ -10,8 +10,6 @@ const isSuccess: Ref<boolean> = ref(false);
 const isError: Ref<boolean> = ref(false);
 
 function error() {
-  login.value = "";
-  password.value = "";
 
   isSuccess.value = false;
   isError.value = true;
@@ -22,8 +20,6 @@ function error() {
 }
 
 function success() {
-  login.value = "";
-  password.value = "";
 
   isSuccess.value = true;
   isError.value = false;
@@ -50,6 +46,9 @@ async function auth(event: Event) {
     }).catch(() => {
       error();
     });
+    
+    login.value = "";
+    password.value = "";
   }
 }
 
@@ -86,12 +85,12 @@ async function auth(event: Event) {
                 <div class="col-12">
                   <transition name="fade">
                     <div v-if="isSuccess">
-                      <Alert text="Успешная авторизация!" type="success"/>
+                      <Alert text="Успешная авторизация!" type="success" />
                     </div>
                   </transition>
                   <transition name="fade">
                     <div v-if="isError">
-                      <Alert text="Неизвестная ошибка" type="danger"/>
+                      <Alert text="Неизвестная ошибка" type="danger" />
                     </div>
                   </transition>
                 </div>
@@ -201,5 +200,4 @@ input::placeholder {
   margin-bottom: 10px;
   color: aliceblue;
 }
-
 </style>

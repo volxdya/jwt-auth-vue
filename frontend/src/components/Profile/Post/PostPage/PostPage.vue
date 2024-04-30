@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import dayjs from 'dayjs';
+
 const props = defineProps({
   login: {
     type: String,
@@ -13,8 +15,12 @@ const props = defineProps({
     required: true,
   }
 });
-</script>
 
+function getTimePost(time: Date) {
+  return dayjs(time).format('DD.MM.YYYY');
+}
+
+</script>
 <template>
   <div class="post">
     <div class="row">
@@ -26,7 +32,10 @@ const props = defineProps({
       </div>
       <div class="col-8 px-5">
         <p class="login">{{props.login}}</p>
-        <p class="date">{{ props.createdAt }}</p>
+        <p class="date">{{ getTimePost(props.createdAt)}}</p>
+      </div>
+      <div class="col-3">
+        <p>123</p>
       </div>
     </div>
     <p class="text mt-3">{{ props.text }}</p>
