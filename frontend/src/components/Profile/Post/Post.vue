@@ -47,11 +47,21 @@ function success() {
 }
 
 async function getPosts() {
-  axios.get(`http://localhost:3006/get_posts_user?author_id=${props.id}`).then((resp) => {
+  await axios.get(`http://localhost:3006/get_posts_user?author_id=${props.id}`).then((resp) => {
     posts.value = resp.data;
   }).catch((err) => {
     console.log(err);
   });
+}
+
+async function deletePost(post_id: string) {
+  await axios.get(`http://localhost:3006/delete_post?id=${post_id}`).then((resp) => {
+    console.log(resp.data);
+  }).catch((err) => {
+    console.log(err);
+  });
+
+  getPosts();
 }
 
 onMounted(() => {
@@ -105,7 +115,8 @@ if (text.value.charAt(0) == "*") {
 
   <div class="mt-5 mb-5">
     <div v-for="(post, index) in posts" :key="index">
-      <PostPage :createdAt="post.createdAt" :text="post.text" :login="props.login" />
+      <PostPage :createdAt="post.createdAt" :text="post.text" :login="props.login" :deletePost="deletePost"
+        :_id="post._id" />
     </div>
   </div>
 </template>

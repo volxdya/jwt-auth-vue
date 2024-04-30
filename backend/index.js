@@ -116,12 +116,19 @@ app.post(`/create_post`, async (req, res) => {
 app.get(`/get_posts_user`, async (req, res) => {
     const { author_id } = req.query;
     try {
-        const post = await Post.find({ author_id: author_id }).sort({createdAt: -1});
-        
+        const post = await Post.find({ author_id: author_id }).sort({ createdAt: -1 });
+
 
         res.send(post);
     } catch (e) {
         console.log(e);
         res.sendStatus(404);
     }
+});
+
+app.get(`/delete_post`, async (req, res) => {
+    const { id } = req.query;
+    await Post.deleteOne({ _id: id });
+
+    res.send('ok');
 });

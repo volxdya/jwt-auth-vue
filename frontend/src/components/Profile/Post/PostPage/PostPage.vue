@@ -1,8 +1,18 @@
 <script setup lang="ts">
 import dayjs from 'dayjs';
+import Trash from '@/components/icons/Trash.vue';
+import type { PropType } from 'vue';
+
+interface deleteFn {
+  (post_id: string): Promise<void>
+}
 
 const props = defineProps({
   login: {
+    type: String,
+    required: true,
+  },
+  _id: {
     type: String,
     required: true,
   },
@@ -13,6 +23,10 @@ const props = defineProps({
   createdAt: {
     type: Date,
     required: true,
+  },
+  deletePost: {
+    type: Function as PropType<deleteFn>,
+    required: true
   }
 });
 
@@ -25,17 +39,14 @@ function getTimePost(time: Date) {
   <div class="post">
     <div class="row">
       <div class="col-1">
-        <img
-            src="https://i.pinimg.com/736x/17/fc/60/17fc600d9bfd9f4aff6bdd718e82df98.jpg"
-            alt="avatar"
-            class="avatar">
+        <img src="https://i.pinimg.com/736x/17/fc/60/17fc600d9bfd9f4aff6bdd718e82df98.jpg" alt="avatar" class="avatar">
       </div>
-      <div class="col-8 px-5">
-        <p class="login">{{props.login}}</p>
-        <p class="date">{{ getTimePost(props.createdAt)}}</p>
+      <div class="col-10 px-5">
+        <p class="login">{{ props.login }}</p>
+        <p class="date">{{ getTimePost(props.createdAt) }}</p>
       </div>
-      <div class="col-3">
-        <p>123</p>
+      <div class="col-1 d-flex align-items-center">
+        <Trash @click="deletePost(props._id)"/>
       </div>
     </div>
     <p class="text mt-3">{{ props.text }}</p>
@@ -43,7 +54,9 @@ function getTimePost(time: Date) {
 </template>
 
 <style scoped>
-.login, .date, .text {
+.login,
+.date,
+.text {
   color: aliceblue;
   margin: 0;
 }
