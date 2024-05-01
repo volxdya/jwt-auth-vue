@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import {onMounted, type Ref, ref, watchEffect} from "vue";
+import { onMounted, type Ref, ref, watchEffect } from "vue";
 import axios from "axios";
-import {decode} from "jwt-js-decode";
-import PostInput from "@/components/Profile/Post/Post.vue";
+import { decode } from "jwt-js-decode";
 import Post from "@/components/Profile/Post/Post.vue";
 
 interface userData {
@@ -13,14 +12,9 @@ interface userData {
 
 const userData: Ref<userData> = ref({});
 
-const token: string = localStorage.getItem("token");
-let jwt;
-let id: string;
-
-if (token) {
-  jwt = decode(token);
-  id = jwt.payload.id;
-}
+const token: string = localStorage.getItem("token") ?? "";
+let jwt = decode(token);;
+let id: string = jwt.payload.id;
 
 async function getUserData() {
   if (token) {
@@ -50,14 +44,14 @@ function logOut() {
         <div class="row">
           <div class="col-3">
             <img src="https://i.pinimg.com/736x/17/fc/60/17fc600d9bfd9f4aff6bdd718e82df98.jpg" alt="avatar"
-                 class="avatar">
+              class="avatar">
           </div>
           <div class="col-8 main-data">
             <p class="login">{{ userData.login }}</p>
           </div>
         </div>
         <div class="post">
-          <Post :id="id" :login="userData.login"/>
+          <Post :id="id" :login="userData.login" />
         </div>
         <!--        <button class="w-100 button" @click="logOut">Выйти</button>-->
       </div>

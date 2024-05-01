@@ -2,7 +2,6 @@
 import axios from "axios";
 import { onMounted, type Ref, ref } from "vue";
 import PostPage from "@/components/Profile/Post/PostPage/PostPage.vue";
-import Alert from "@/components/ui/Alert.vue";
 
 const text: Ref<string> = ref("");
 const isSuccess: Ref<boolean> = ref(false);
@@ -17,10 +16,12 @@ const props = defineProps({
   login: {
     type: String,
     required: true,
+    default: ""
   }
 });
 
 interface posts {
+  _id: String;
   text: String;
   author_id: String;
   createdAt: Date;
@@ -48,7 +49,12 @@ function success() {
 
 async function getPosts() {
   await axios.get(`http://localhost:3006/get_posts_user?author_id=${props.id}`).then((resp) => {
-    posts.value = resp.data;
+    if (resp.data !== undefined) {
+      posts.value = resp.data;
+      console.log(posts.value)
+    } else {
+      return null;
+    }
   }).catch((err) => {
     console.log(err);
   });
@@ -71,7 +77,7 @@ onMounted(() => {
 async function createPost(event: Event) {
   event.preventDefault();
 
-  if (text.value.length < 8) {
+  if (text.value.length < 6) {
     error();
   } else {
     axios.post(`http://localhost:3006/create_post`, {
@@ -89,25 +95,21 @@ async function createPost(event: Event) {
   }
 }
 
-if (text.value.charAt(0) == "*") {
-  isBold.value = true;
-}
-
-
 </script>
 
 <template>
   <form @submit="createPost">
     <textarea type="text" placeholder="Расскажите о своем настроении" v-model="text" :class="{
       error: isError,
+      success: isSuccess,
       bold: isBold
     }" />
+    <transition name="fade">
+      <p class="feedback-error" v-if="isError">Слишком короткий текст</p>
+    </transition>
     <div class="mt-2">
       <transition name="fade">
-        <Alert text="Слишком короткий текст" type="danger" v-if="isError" />
-      </transition>
-      <transition name="fade">
-        <Alert text="Успешно!" type="success" v-if="isSuccess" />
+        <p class="feedback-success" v-if="isSuccess">Успешно!</p>
       </transition>
     </div>
     <button class="button">Опубликовать</button>
@@ -115,13 +117,23 @@ if (text.value.charAt(0) == "*") {
 
   <div class="mt-5 mb-5">
     <div v-for="(post, index) in posts" :key="index">
-      <PostPage :createdAt="post.createdAt" :text="post.text" :login="props.login" :deletePost="deletePost"
-        :_id="post._id" />
+      <PostPage :createdAt="post.createdAt" :text="post.text.toString()" :login="props.login" :deletePost="deletePost"
+        :_id="post._id.toString()" />
     </div>
   </div>
 </template>
 
 <style scoped>
+.feedback-error {
+  color: rgb(254, 55, 55);
+  font-weight: 300;
+}
+
+.feedback-success {
+  color: rgb(108, 252, 132);
+  font-weight: 300;
+}
+
 textarea {
   width: 900px;
   background: none;
@@ -150,6 +162,10 @@ textarea::placeholder {
 
 .error {
   outline: 1px solid rgb(254, 55, 55);
+}
+
+.success {
+  outline: 1px solid rgb(108, 252, 132);
 }
 
 .button {

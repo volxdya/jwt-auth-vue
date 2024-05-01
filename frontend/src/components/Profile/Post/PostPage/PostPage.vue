@@ -15,10 +15,12 @@ const props = defineProps({
   _id: {
     type: String,
     required: true,
+    default: ""
   },
   text: {
     type: String,
     required: true,
+    default: ""
   },
   createdAt: {
     type: Date,
