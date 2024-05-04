@@ -3,11 +3,14 @@ import dayjs from 'dayjs';
 import Trash from '@/components/icons/Trash.vue';
 import Pen from '@/components/icons/Pen.vue';
 import { ref, type PropType, type Ref } from 'vue';
-
-const isEdit: Ref<boolean> = ref(false);
+import axios from 'axios';
 
 interface deleteFn {
-  (post_id: string): Promise<void>
+  (post_id: string): Promise<void>;
+}
+
+interface getPosts {
+  (): Promise<void>;
 }
 
 const props = defineProps({
@@ -32,11 +35,52 @@ const props = defineProps({
   deletePost: {
     type: Function as PropType<deleteFn>,
     required: true
+  },
+  getPosts: {
+    type: Function as PropType<getPosts>,
+    required: true
   }
 });
 
+const isEdit: Ref<boolean> = ref(false);
+const isError: Ref<boolean> = ref(false);
+const textPost: Ref<string> = ref(props.text);
+
 function getTimePost(time: Date) {
   return dayjs(time).format('DD.MM.YYYY');
+}
+
+function error() {
+  isError.value = true;
+
+  setInterval(() => {
+    isError.value = false;
+  }, 10000);
+}
+
+
+function edit(event: Event) {
+  event.preventDefault();
+
+  if (textPost.value === "") {
+    error();
+  }
+  else if (textPost.value == props.text) {
+    isEdit.value = false;
+  }
+  else {
+    axios.post(`http://localhost:3006/edit_post`, {
+      id: props._id,
+      text: textPost.value
+    }).then(() => {
+      isEdit.value = false;
+      isError.value = false;
+      props.getPosts();
+    }).catch(() => {
+      error();
+    });
+  }
+
 }
 
 </script>
@@ -51,21 +95,36 @@ function getTimePost(time: Date) {
         <p class="date">{{ getTimePost(props.createdAt) }}</p>
       </div>
       <div class="col-2 d-flex align-items-center justify-content-end gap-3">
-        <Pen />
+        <Pen @click="isEdit = true" />
         <Trash @click="deletePost(props._id)" />
       </div>
     </div>
-    <!-- <p class="text mt-3">{{ props.text }}</p> -->
-    <form class="mt-3">
-      <input type="text" >
+    <p class="text mt-3" v-if="!isEdit">{{ props.text }}</p>
+    <form class="mt-3" @submit="edit" v-else>
+      <input type="text" v-model="textPost" :class="{
+        error: isError
+      }">
+      <transition name="fade">
+        <p class="feedback-error" v-if="isError">Ошибка!</p>
+      </transition>
       <div class="d-flex justify-content-end">
-        <button>Редактировать</button>
+        <button class="mt-2 button">Редактировать</button>
       </div>
     </form>
   </div>
 </template>
 
 <style scoped>
+.error {
+  outline: 1px solid rgb(254, 55, 55);
+}
+
+.feedback-error {
+  color: rgb(254, 55, 55);
+  font-weight: 300;
+}
+
+
 .login,
 .date,
 .text {
@@ -75,6 +134,14 @@ function getTimePost(time: Date) {
 
 .text {
   font-size: 20px;
+}
+
+.button {
+  outline: 1px solid #2b2b2b;
+  padding: 8px;
+  width: 150px;
+  border-radius: 10px;
+  color: aliceblue;
 }
 
 .date {
@@ -119,5 +186,4 @@ input:focus {
   background: rgba(47, 47, 47, 0.46);
   transition: transform 0.4s ease-in-out, background 0.4s ease-in-out;
 }
-
 </style>

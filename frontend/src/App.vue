@@ -13,8 +13,17 @@ import {RouterLink, RouterView} from 'vue-router'
 </template>
 
 <style>
+
 .alert {
   width: 400px;
+}
+button {
+  background: none;
+  border: none;
+}
+input, textarea {
+  border: none;
+  background: none;
 }
 
 body {

@@ -122,12 +122,10 @@ a {
 }
 
 .button {
-  border: none;
   outline: 1px solid #2b2b2b;
   height: 50px;
   width: 400px;
   border-radius: 10px;
-  background: none;
   color: aliceblue;
   font-size: 19px;
 }
@@ -162,9 +160,7 @@ a {
 
 input {
   width: 400px;
-  background: none;
   padding-left: 15px;
-  border: none;
   outline: 1px solid #2a2a2a;
   color: rgb(254, 254, 254);
   height: 40px;

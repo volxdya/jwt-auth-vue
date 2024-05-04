@@ -117,8 +117,14 @@ async function createPost(event: Event) {
 
   <div class="mt-5 mb-5">
     <div v-for="(post, index) in posts" :key="index">
-      <PostPage :createdAt="post.createdAt" :text="post.text.toString()" :login="props.login" :deletePost="deletePost"
-        :_id="post._id.toString()" />
+      <PostPage 
+        :createdAt="post.createdAt" 
+        :text="post.text.toString()" 
+        :login="props.login" 
+        :deletePost="deletePost"
+        :_id="post._id.toString()" 
+        :getPosts="getPosts"
+      />
     </div>
   </div>
 </template>
@@ -136,9 +142,7 @@ async function createPost(event: Event) {
 
 textarea {
   width: 900px;
-  background: none;
   padding: 10px 0 0 15px;
-  border: none;
   outline: 1px solid #2a2a2a;
   color: rgb(254, 254, 254);
   height: 80px;

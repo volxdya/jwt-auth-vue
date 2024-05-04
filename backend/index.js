@@ -136,8 +136,13 @@ app.get(`/delete_post`, async (req, res) => {
 app.post(`/edit_post`, async (req, res) => {
     const { id, text } = req.body;
     const post = await Post.findOne({ _id: id });
-    post.text = text;
+    try {
+        post.text = text;
 
-    await post.save();
-    res.send(post);
+        await post.save();
+        res.send(post);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(404);
+    }
 });
