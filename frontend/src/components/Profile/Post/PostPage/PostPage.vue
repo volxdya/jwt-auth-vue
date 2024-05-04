@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import dayjs from 'dayjs';
 import Trash from '@/components/icons/Trash.vue';
-import type { PropType } from 'vue';
+import Pen from '@/components/icons/Pen.vue';
+import { ref, type PropType, type Ref } from 'vue';
+
+const isEdit: Ref<boolean> = ref(false);
 
 interface deleteFn {
   (post_id: string): Promise<void>
@@ -43,15 +46,22 @@ function getTimePost(time: Date) {
       <div class="col-1">
         <img src="https://i.pinimg.com/736x/17/fc/60/17fc600d9bfd9f4aff6bdd718e82df98.jpg" alt="avatar" class="avatar">
       </div>
-      <div class="col-10 px-5">
+      <div class="col-9 px-5">
         <p class="login">{{ props.login }}</p>
         <p class="date">{{ getTimePost(props.createdAt) }}</p>
       </div>
-      <div class="col-1 d-flex align-items-center">
-        <Trash @click="deletePost(props._id)"/>
+      <div class="col-2 d-flex align-items-center justify-content-end gap-3">
+        <Pen />
+        <Trash @click="deletePost(props._id)" />
       </div>
     </div>
-    <p class="text mt-3">{{ props.text }}</p>
+    <!-- <p class="text mt-3">{{ props.text }}</p> -->
+    <form class="mt-3">
+      <input type="text" >
+      <div class="d-flex justify-content-end">
+        <button>Редактировать</button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -91,4 +101,23 @@ function getTimePost(time: Date) {
   width: 80px;
   object-fit: cover;
 }
+
+input {
+  width: 100%;
+  background: none;
+  padding: 10px 0 0 15px;
+  border: none;
+  outline: 1px solid #2a2a2a;
+  color: rgb(254, 254, 254);
+  height: 40px;
+  border-radius: 15px;
+  font-size: 17px;
+}
+
+input:focus {
+  transform: scale(1.02);
+  background: rgba(47, 47, 47, 0.46);
+  transition: transform 0.4s ease-in-out, background 0.4s ease-in-out;
+}
+
 </style>
