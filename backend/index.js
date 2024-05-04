@@ -132,3 +132,12 @@ app.get(`/delete_post`, async (req, res) => {
 
     res.send('ok');
 });
+
+app.post(`/edit_post`, async (req, res) => {
+    const { id, text } = req.body;
+    const post = await Post.findOne({ _id: id });
+    post.text = text;
+
+    await post.save();
+    res.send(post);
+});
