@@ -62,7 +62,7 @@ function error() {
 function edit(event: Event) {
   event.preventDefault();
 
-  if (textPost.value === "") {
+  if (textPost.value.length < 6) {
     error();
   }
   else if (textPost.value == props.text) {
@@ -105,7 +105,7 @@ function edit(event: Event) {
         error: isError
       }">
       <transition name="fade">
-        <p class="feedback-error" v-if="isError">Ошибка!</p>
+        <p class="feedback-error" v-if="isError">Слишком короткий пост!</p>
       </transition>
       <div class="d-flex justify-content-end">
         <button class="mt-2 button">Редактировать</button>
