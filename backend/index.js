@@ -24,6 +24,5 @@ const post = require(`./routes/post.route`);
 
 
 // ROUTES
-
 app.use(`/`, user);
 app.use(`/`, post);
