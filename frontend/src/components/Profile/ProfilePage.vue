@@ -38,15 +38,15 @@ function logOut() {
 
 <template>
   <div class="d-flex justify-content-center">
-    <div class="col-9 test" v-if="token">
+    <div class="col-xl-9 col-12" v-if="token">
       <div class="banner">
-        <img src="https://i.pinimg.com/564x/17/40/b0/1740b0c94e4457fde617fb133d622b35.jpg" alt="banner" class="banner">
+        <img src="https://i.pinimg.com/564x/17/40/b0/1740b0c94e4457fde617fb133d622b35.jpg" alt="banner" class="bannerImg">
         <div class="row">
-          <div class="col-3">
+          <div class="col-xl-3 col-12 d-flex justify-content-center">
             <img src="https://i.pinimg.com/736x/17/fc/60/17fc600d9bfd9f4aff6bdd718e82df98.jpg" alt="avatar"
               class="avatar">
           </div>
-          <div class="col-8 main-data">
+          <div class="col-xl-8 col-12 main-data">
             <p class="login">{{ userData.login }}</p>
           </div>
         </div>
@@ -69,7 +69,7 @@ function logOut() {
   color: aliceblue;
 }
 
-.banner {
+.bannerImg {
   width: 100%;
   outline: 3px solid #626262;
   object-fit: cover;
@@ -112,5 +112,26 @@ function logOut() {
   font-size: 30px;
   font-weight: 500;
   color: aliceblue;
+}
+
+@media screen and (max-width: 768px) {
+  .avatar {
+    left: 0;
+    height: 180px;
+    width: 180px;
+  }
+  .bannerImg {
+    height: 200px;
+  }
+  .main-data {
+    top: -100px;
+    position: relative;
+    text-align: center;
+    padding: 15px 0 0 0;
+  }
+  .post {
+    position: relative;
+    top: -80px;
+  }
 }
 </style>

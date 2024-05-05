@@ -187,4 +187,13 @@ textarea::placeholder {
   transform: scale(1.05);
   transition: transform 0.5s;
 }
+
+@media screen and (max-width: 768px) {
+  textarea {
+    width: 100%;
+  }
+  .button {
+    width: 100%;
+  }
+}
 </style>

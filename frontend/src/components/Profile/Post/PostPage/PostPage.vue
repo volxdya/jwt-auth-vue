@@ -90,11 +90,11 @@ function edit(event: Event) {
       <div class="col-1">
         <img src="https://i.pinimg.com/736x/17/fc/60/17fc600d9bfd9f4aff6bdd718e82df98.jpg" alt="avatar" class="avatar">
       </div>
-      <div class="col-9 px-5">
+      <div class="col-7 px-5 main-data">
         <p class="login">{{ props.login }}</p>
         <p class="date">{{ getTimePost(props.createdAt) }}</p>
       </div>
-      <div class="col-2 d-flex align-items-center justify-content-end gap-3">
+      <div class="col-3 d-flex align-items-center justify-content-end gap-3">
         <Pen @click="isEdit = true" />
         <Trash @click="deletePost(props._id)" />
       </div>
@@ -185,5 +185,27 @@ input:focus {
   transform: scale(1.02);
   background: rgba(47, 47, 47, 0.46);
   transition: transform 0.4s ease-in-out, background 0.4s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+  .post {
+    width: 100%;
+  }
+  .login,
+  .date,
+  .text {
+    font-size: 17px;
+  }
+  .avatar {
+    height: 70px;
+    width: 70px;
+  }
+  .main-data {
+    margin-left: 20px;
+  }
+  .pen, .trash {
+    width: 18px;
+    height: 18px
+  }
 }
 </style>
