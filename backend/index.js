@@ -21,10 +21,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/auth');
 // ROUTERS
 const user = require(`./routes/user.route`);
 const post = require(`./routes/post.route`);
+const like = require(`./routes/like.route`);
 
 
 // ROUTES
 app.use(`/`, user);
 app.use(`/`, post);
+app.use(`/`, like);
 
 // hello danil

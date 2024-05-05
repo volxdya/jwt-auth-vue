@@ -117,7 +117,8 @@ async function createPost(event: Event) {
 
   <div class="mt-5 mb-5">
     <div v-for="(post, index) in posts" :key="index">
-      <PostPage 
+      <PostPage
+        :user_id="props.id"
         :createdAt="post.createdAt" 
         :text="post.text.toString()" 
         :login="props.login" 
