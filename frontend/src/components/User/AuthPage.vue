@@ -58,54 +58,54 @@ async function auth(event: Event) {
   <div class="wrapper">
     <div class="container-form">
       <form class="form d-flex justify-content-center align-items-center" @submit="auth">
-        <div class="col-8">
-          <div class="text-center">
-            <p class="main-title">Авторизация</p>
-          </div>
-          <div class="row mt-4">
-            <div class="col-12">
-              <label>
-                <p class="label">Логин <span class="title">*</span></p>
-                <input type="text" placeholder="Введите логин" v-model="login">
-              </label>
+          <div class="col-xl-8 col-12">
+            <div class="text-center">
+              <p class="main-title">Авторизация</p>
             </div>
-            <div class="col-12 mt-3">
-              <label>
-                <p class="label">Пароль <span class="title">*</span></p>
-                <input type="text" placeholder="Введите пароль" v-model="password">
-              </label>
-            </div>
-            <RouterLink to="/profile">
-              <p class="mt-3">
-                <span class="go-profile">Перейти к профилю</span>
-              </p>
-            </RouterLink>
-            <div class="col-12">
-              <div class="row">
-                <div class="col-12">
-                  <transition name="fade">
-                    <div v-if="isSuccess">
-                      <Alert text="Успешная авторизация!" type="success" />
-                    </div>
-                  </transition>
-                  <transition name="fade">
-                    <div v-if="isError">
-                      <Alert text="Неизвестная ошибка" type="danger" />
-                    </div>
-                  </transition>
-                </div>
-                <div class="col-6">
-                  <button class="mt-4 button">Войти</button>
-                </div>
-                <div class="col-6">
-                  <RouterLink to="/register">
-                    <button class="mt-4 button-register">Регистрация</button>
-                  </RouterLink>
+            <div class="row mt-4">
+              <div class="col-12">
+                <label>
+                  <p class="label">Логин <span class="title">*</span></p>
+                  <input type="text" placeholder="Введите логин" v-model="login">
+                </label>
+              </div>
+              <div class="col-12 mt-3">
+                <label>
+                  <p class="label">Пароль <span class="title">*</span></p>
+                  <input type="text" placeholder="Введите пароль" v-model="password">
+                </label>
+              </div>
+              <RouterLink to="/profile">
+                <p class="mt-3">
+                  <span class="go-profile">Перейти к профилю</span>
+                </p>
+              </RouterLink>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12">
+                    <transition name="fade">
+                      <div v-if="isSuccess">
+                        <Alert text="Успешная авторизация!" type="success" />
+                      </div>
+                    </transition>
+                    <transition name="fade">
+                      <div v-if="isError">
+                        <Alert text="Неизвестная ошибка" type="danger" />
+                      </div>
+                    </transition>
+                  </div>
+                  <div class="col-6">
+                    <button class="mt-4 button">Войти</button>
+                  </div>
+                  <div class="col-6">
+                    <RouterLink to="/register">
+                      <button class="mt-4 button-register">Регистрация</button>
+                    </RouterLink>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
       </form>
     </div>
   </div>
@@ -195,5 +195,18 @@ input::placeholder {
   font-weight: 500;
   margin-bottom: 10px;
   color: aliceblue;
+}
+
+@media screen and (max-width: 768px) {
+  .form, .container-form {
+    width: 100%;
+  }
+  .container-form {
+    height: 800px;
+  }
+  input {
+    height: 50px;
+    font-size: 20px;
+  }
 }
 </style>

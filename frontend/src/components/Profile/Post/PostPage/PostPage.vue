@@ -90,7 +90,7 @@ function edit(event: Event) {
       <div class="col-1">
         <img src="https://i.pinimg.com/736x/17/fc/60/17fc600d9bfd9f4aff6bdd718e82df98.jpg" alt="avatar" class="avatar">
       </div>
-      <div class="col-7 px-5 main-data">
+      <div class="col-xl-8 col-7 px-5 main-data">
         <p class="login">{{ props.login }}</p>
         <p class="date">{{ getTimePost(props.createdAt) }}</p>
       </div>

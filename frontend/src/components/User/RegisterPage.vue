@@ -57,7 +57,7 @@ async function register(event: Event) {
   <div class="wrapper">
     <div class="container-form">
       <form class="form d-flex justify-content-center align-items-center" @submit="register">
-        <div class="col-8">
+        <div class="col-xl-8 col-12">
           <div class="text-center">
             <p class="main-title">Регистрация</p>
           </div>
@@ -182,5 +182,16 @@ input::placeholder {
   margin-bottom: 10px;
   color: aliceblue;
 }
-
+@media screen and (max-width: 768px){
+  .form, .container-form {
+    width: 100%;
+  }
+  .container-form {
+    height: 800px;
+  }
+  input {
+    height: 50px;
+    font-size: 20px;
+  }
+}
 </style>
