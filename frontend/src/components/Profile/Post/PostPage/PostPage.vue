@@ -138,6 +138,7 @@ async function like() {
   getLikesByPost();
 }
 
+
 onMounted(() => {
   getLikesByPost();
 });
