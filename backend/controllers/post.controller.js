@@ -65,6 +65,12 @@ class PostController {
             res.sendStatus(404);
         }
     }
+
+    async getAllPosts(req, res) {
+        const posts = await Post.find();
+
+        res.send(posts);
+    }
 }
 
 module.exports = new PostController();

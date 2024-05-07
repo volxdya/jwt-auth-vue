@@ -48,6 +48,19 @@ class UserController {
             res.sendStatus(404);
         }
     }
+
+    async getUserDataByPost() {
+        const { author_id } = req.query;
+
+        const user = await User.findOne({ _id: author_id });
+
+        try {
+            res.send(user);
+        } catch (err) {
+            res.send(404);
+            console.log(err);
+        }
+    }
 }
 
 module.exports = new UserController();

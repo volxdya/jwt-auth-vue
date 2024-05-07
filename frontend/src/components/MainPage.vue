@@ -16,6 +16,9 @@
         <RouterLink to="/profile">
           <button class="button">Профиль</button>
         </RouterLink>
+        <RouterLink to="/news">
+          <button class="button">Новости</button>
+        </RouterLink>
       </div>
     </div>
   </div>
