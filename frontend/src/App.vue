@@ -1,27 +1,34 @@
 <script setup lang="ts">
-import {RouterLink, RouterView} from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
+import HeaderApp from './components/Header/HeaderApp.vue';
+
+
+
 </script>
 
 <template>
   <div class="wrapperApp">
     <div class="content">
-      <div class="container">
-        <RouterView/>
+      <HeaderApp v-if="this.$route.name !== 'AuthPage' && this.$route.name !== 'RegisterPage'" />
+      <div class="container mt-4">
+        <RouterView />
       </div>
     </div>
   </div>
 </template>
 
 <style>
-
 .alert {
   width: 400px;
 }
+
 button {
   background: none;
   border: none;
 }
-input, textarea {
+
+input,
+textarea {
   border: none;
   background: none;
 }

@@ -35,10 +35,6 @@ onMounted(() => {
   getUserData();
 });
 
-function logOut() {
-  localStorage.removeItem("token");
-  location.reload();
-}
 </script>
 
 <template>
@@ -59,7 +55,6 @@ function logOut() {
         <div class="post">
           <Post :id="id" :login="userData.login" />
         </div>
-        <!--        <button class="w-100 button" @click="logOut">Выйти</button>-->
       </div>
     </div>
     <div v-else class="mt-3">

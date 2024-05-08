@@ -31,7 +31,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <h3 class="mt-3">Недавние записи</h3>
+        <h3 class="mt-3 text-center">Недавние записи</h3>
         <div class="mt-5">
             <News v-for="(item) in postsData" :_id="item._id" :author_id="item.author_id" :text="item.text"
                 :created-at="item.createdAt" />
