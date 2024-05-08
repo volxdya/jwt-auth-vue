@@ -135,7 +135,7 @@ async function like() {
     });
   }
 
-  getLikesByPost();
+  await getLikesByPost();
 }
 
 

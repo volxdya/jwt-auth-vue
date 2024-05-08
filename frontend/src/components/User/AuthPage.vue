@@ -3,6 +3,7 @@ import { type Ref, ref } from "vue";
 import axios from "axios";
 import { setItem } from "@/utils/localStorage";
 import Alert from "@/components/ui/Alert.vue";
+import {api} from "../../../Constants";
 
 const login: Ref<string> = ref("");
 const password: Ref<string> = ref("");
@@ -37,7 +38,7 @@ async function auth(event: Event) {
   if (login.value == "" || password.value == "") {
     error();
   } else {
-    await axios.post("http://localhost:3006/login", {
+    await axios.post(`${api}/login`, {
       login: login.value,
       password: password.value
     }).then((resp) => {

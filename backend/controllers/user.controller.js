@@ -49,7 +49,7 @@ class UserController {
         }
     }
 
-    async getUserDataByPost() {
+    async getUserDataByPost(req, res) {
         const { author_id } = req.query;
 
         const user = await User.findOne({ _id: author_id });

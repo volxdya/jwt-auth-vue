@@ -2,6 +2,7 @@
 import axios from "axios";
 import { onMounted, type Ref, ref } from "vue";
 import PostPage from "@/components/Profile/Post/PostPage/PostPage.vue";
+import {api} from "../../../../Constants";
 
 const text: Ref<string> = ref("");
 const isSuccess: Ref<boolean> = ref(false);
@@ -48,7 +49,7 @@ function success() {
 }
 
 async function getPosts() {
-  await axios.get(`http://localhost:3006/get_posts_user?author_id=${props.id}`).then((resp) => {
+  await axios.get(`${api}/get_posts_user?author_id=${props.id}`).then((resp) => {
     if (resp.data !== undefined) {
       posts.value = resp.data;
       console.log(posts.value)
@@ -61,7 +62,7 @@ async function getPosts() {
 }
 
 async function deletePost(post_id: string) {
-  await axios.get(`http://localhost:3006/delete_post?id=${post_id}`).then((resp) => {
+  await axios.get(`${api}/delete_post?id=${post_id}`).then((resp) => {
     console.log(resp.data);
   }).catch((err) => {
     console.log(err);
@@ -80,7 +81,7 @@ async function createPost(event: Event) {
   if (text.value.length < 6) {
     error();
   } else {
-    axios.post(`http://localhost:3006/create_post`, {
+    axios.post(`${api}/create_post`, {
       author_id: props.id,
       text: text.value
     }).then(() => {

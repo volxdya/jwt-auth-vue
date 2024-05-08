@@ -2,6 +2,7 @@
 import { type Ref, ref, watchEffect } from "vue";
 import axios from "axios";
 import Alert from "@/components/ui/Alert.vue";
+import {api} from "../../../Constants";
 
 const login: Ref<string> = ref("");
 const password: Ref<string> = ref("");
@@ -40,7 +41,7 @@ async function register(event: Event) {
   if (login.value == "" || password.value == "") {
     error();
   } else {
-    await axios.post("http://localhost:3006/register", {
+    await axios.post(`${api}/register`, {
       login: login.value,
       password: password.value
     }).then(() => {

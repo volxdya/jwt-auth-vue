@@ -3,12 +3,7 @@ import axios from 'axios';
 import { decode } from 'jwt-js-decode';
 import { onMounted, ref, type Ref } from 'vue';
 import { api } from '../../../Constants'
-
-interface userData {
-    _id?: string;
-    password?: string;
-    login?: string;
-}
+import News from "@/components/NewsPage/News/News.vue";
 
 interface IPostsData {
     _id?: string;
@@ -17,42 +12,17 @@ interface IPostsData {
     createdAt?: Date;
 }
 
-const userData: Ref<userData> = ref({});
 const postsData: Ref = ref<IPostsData[]>([]);
-const userPostData: Ref = ref<userData[]>([]);
-
-const token: string = localStorage.getItem("token") ?? "";
-let jwt = decode(token);;
-let id: string = jwt.payload.id;
-
-async function getUserData() {
-    if (token) {
-        axios.get(`${api}/get_user_data?id=${id}`).then((resp) => {
-            userData.value = resp.data;
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
-}
 
 async function getPosts() {
     axios.get(`${api}/get_all_posts`).then((resp) => {
-        postsData.value = resp.data
-    }).catch((err) => {
-        console.log(err);
-    });
-}
-
-async function getUserDataByPost() {
-    await axios.get(`${api}/get_user_data_by_post`).then((reps) => {
-
+        postsData.value = resp.data;
     }).catch((err) => {
         console.log(err);
     });
 }
 
 onMounted(() => {
-    getUserData();
     getPosts();
 });
 
@@ -61,7 +31,19 @@ onMounted(() => {
 
 <template>
     <div>
+        <h3>Самые популярные записи</h3>
+        <News
+            v-for="(item, index) in postsData"
+            :key="index"
+            :_id="item._id"
+            :author_id="item.author_id"
+            :text="item.text"
+        />
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+h3 {
+    color: aliceblue;
+}
+</style>
