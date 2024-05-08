@@ -67,7 +67,7 @@ class PostController {
     }
 
     async getAllPosts(req, res) {
-        const posts = await Post.find();
+        const posts = await Post.find().sort({createdAt: -1});
 
         res.send(posts);
     }

@@ -31,14 +31,11 @@ onMounted(() => {
 
 <template>
     <div>
-        <h3>Самые популярные записи</h3>
-        <News
-            v-for="(item, index) in postsData"
-            :key="index"
-            :_id="item._id"
-            :author_id="item.author_id"
-            :text="item.text"
-        />
+        <h3 class="mt-3">Недавние записи</h3>
+        <div class="mt-5">
+            <News v-for="(item) in postsData" :_id="item._id" :author_id="item.author_id" :text="item.text"
+                :created-at="item.createdAt" />
+        </div>
     </div>
 </template>
 

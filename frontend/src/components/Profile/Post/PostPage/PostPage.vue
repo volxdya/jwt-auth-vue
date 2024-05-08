@@ -134,7 +134,8 @@ async function like() {
       wrongLike.value = false;
     });
   }
-
+  
+  await props.getPosts();
   await getLikesByPost();
 }
 
