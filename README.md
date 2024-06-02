@@ -1,5 +1,5 @@
 # jwt-auth-vue
-jwt + vue + express + mongodb (goose xd)
+jwt + vue + express (new Nest.js) + postgres
 
 
 cd frontend
