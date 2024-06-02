@@ -23,7 +23,7 @@ if (token) {
 
 async function getUserData() {
   if (token) {
-    axios.get(`http://localhost:3006/get_user_data?id=${id}`).then((resp) => {
+    axios.get(`http://localhost:3001/user/get_by_id/${id}`).then((resp) => {
       userData.value = resp.data;
     }).catch((err) => {
       console.log(err);

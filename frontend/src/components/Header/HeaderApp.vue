@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { decode } from 'jwt-js-decode';
 import { onMounted, ref, type Ref } from 'vue';
+import {api} from "../../../Constants";
 interface userData {
 
     _id?: string;
@@ -24,7 +25,7 @@ if (token) {
 
 async function getUserData() {
     if (token) {
-        axios.get(`http://localhost:3006/get_user_data?id=${id}`).then((resp) => {
+        axios.get(`${api}/user/get_by_id/${id}`).then((resp) => {
             userData.value = resp.data;
         }).catch((err) => {
             console.log(err);

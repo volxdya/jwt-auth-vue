@@ -38,7 +38,7 @@ async function auth(event: Event) {
   if (login.value == "" || password.value == "") {
     error();
   } else {
-    await axios.post(`${api}/login`, {
+    await axios.post(`${api}/auth/sign_in`, {
       login: login.value,
       password: password.value
     }).then((resp) => {

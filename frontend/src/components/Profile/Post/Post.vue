@@ -49,7 +49,7 @@ function success() {
 }
 
 async function getPosts() {
-  await axios.get(`${api}/get_posts_user?author_id=${props.id}`).then((resp) => {
+  await axios.get(`${api}/post/get_by_userId/${props.id}`).then((resp) => {
     if (resp.data !== undefined) {
       posts.value = resp.data;
       console.log(posts.value)
@@ -62,7 +62,7 @@ async function getPosts() {
 }
 
 async function deletePost(post_id: string) {
-  await axios.get(`${api}/delete_post?id=${post_id}`).then((resp) => {
+  await axios.delete(`${api}/post/delete/${post_id}`).then((resp) => {
     console.log(resp.data);
   }).catch((err) => {
     console.log(err);
@@ -81,9 +81,10 @@ async function createPost(event: Event) {
   if (text.value.length < 6) {
     error();
   } else {
-    axios.post(`${api}/create_post`, {
-      author_id: props.id,
-      text: text.value
+    axios.post(`${api}/post/create`, {
+      userId: props.id,
+      description: text.value,
+      title: 'похуй'
     }).then(() => {
       getPosts();
       success();
@@ -121,10 +122,10 @@ async function createPost(event: Event) {
       <PostPage
         :user_id="props.id"
         :createdAt="post.createdAt" 
-        :text="post.text.toString()" 
+        :description="post.description.toString()"
         :login="props.login" 
         :deletePost="deletePost"
-        :_id="post._id.toString()" 
+        :id="post.id.toString()"
         :getPosts="getPosts"
       />
     </div>

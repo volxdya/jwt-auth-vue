@@ -41,7 +41,7 @@ async function register(event: Event) {
   if (login.value == "" || password.value == "") {
     error();
   } else {
-    await axios.post(`${api}/register`, {
+    await axios.post(`${api}/user/create`, {
       login: login.value,
       password: password.value
     }).then(() => {
