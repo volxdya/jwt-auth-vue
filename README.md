@@ -23,3 +23,15 @@ cd ../backend
 npm install
 npm run start:dev
 ```
+
+
+# Start project with Docker
+```
+cd ./backend
+docker-compose build
+docker-compose up
+```
+
+```
+Пока что фронтенд без докера =D
+```
